@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Car Rental</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2ecc71;
+      --accent-color: #e74c3c;
+      --dark-color: #2c3e50;
+      --light-color: #ecf0f1;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+     	  background: linear-gradient(to right, rgba(230, 100, 101, 0.8), rgba(145, 152, 229, 0.8)), 
+          url('imgs/admin_dashboard.jpg') no-repeat center center fixed;
+    	  background-size: cover;
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .logout-btn {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    /* Cards Container */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    /* Card Styles */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:nth-child(2) {
+      border-top-color: var(--secondary-color);
+    }
+
+    .card:nth-child(3) {
+      border-top-color: var(--accent-color);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .card:nth-child(2) .btn {
+      background-color: var(--secondary-color);
+    }
+
+    .card:nth-child(3) .btn {
+      background-color: var(--accent-color);
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Card Icons */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 50px;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .card:nth-child(1)::before {
+      content: "\f1b9";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--primary-color);
+    }
+
+    .card:nth-child(2)::before {
+      content: "\f0c0";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--secondary-color);
+    }
+
+    .card:nth-child(3)::before {
+      content: "\f274";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--accent-color);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header Section -->
+    <div class="header">
+      <h1><i class="fas fa-user-shield"></i> Welcome Admin</h1>
+      <a href="index.html" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+
+    <!-- Dashboard Cards Section -->
+    <div class="card-container">
+      <!-- Manage Cars Card -->
+      <div class="card">
+        <h3><i class="fas fa-car"></i> Manage Cars</h3>
+        <p>Add, edit, or remove vehicles from your fleet. Update availability, pricing, and specifications.</p>
+        <a href="jsp/manage_cars.jsp" class="btn">
+          <i class="fas fa-arrow-right"></i> Manage Cars
+        </a>
+      </div>
+
+      <!-- View Users Card -->
+      <div class="card">
+        <h3><i class="fas fa-users"></i> View Users</h3>
+        <p>See all registered users, their details, rental history, and manage accounts.</p>
+        <a href="jsp/view_users.jsp" class="btn">
+          <i class="fas fa-arrow-right"></i> View Users
+        </a>
+      </div>
+
+      <!-- View Bookings Card -->
+      <div class="card">
+        <h3><i class="fas fa-calendar-check"></i> View Bookings</h3>
+        <p>Manage current reservations, view past rentals, and process cancellations.</p>
+        <a href="jsp/view_bookings.jsp" class="btn">
+          <i class="fas fa-arrow-right"></i> View Bookings
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

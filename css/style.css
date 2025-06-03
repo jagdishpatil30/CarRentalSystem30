@@ -1,0 +1,98 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to right, #6a6eff, #948dfb);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.welcome-container {
+  text-align: center;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.welcome-box h1 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.welcome-box h1 span {
+  color: #4e54c8;
+}
+
+.welcome-box p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.user-btn {
+  background-color: #4e54c8;
+  color: white;
+}
+
+.user-btn:hover {
+  background-color: #3a3fc0;
+}
+
+.admin-btn {
+  background-color: #ff6600;
+  color: white;
+}
+
+.admin-btn:hover {
+  background-color: #e65c00;
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+  .welcome-box {
+    padding: 30px 20px;
+  }
+
+  .welcome-box h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-box p {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}

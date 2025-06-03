@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarRent Authentication</title>
+    <style>
+        :root {
+            --primary-color: #2196f3;
+            --secondary-color: #4caf50;
+            --accent-color: #ff9800;
+            --danger-color: #f44336;
+            --dark-color: #1e1e2f;
+            --light-color: #f4f6f8;
+            --gray-color: #666;
+            --border-color: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+       body {
+   				background: linear-gradient(to right, rgba(230, 100, 101, 0.8), rgba(145, 152, 229, 0.8)), 
+                url('imgs/car.jpeg') no-repeat center center fixed;
+    			background-size: cover;
+    			display: flex;
+    			flex-direction: column;
+    			align-items: center;
+			    min-height: 100vh;
+			    padding: 20px;
+			}
+
+        .welcome-title {
+            font-size: 2.5rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeInTitle 1s ease-out;
+        }
+
+        @keyframes fadeInTitle {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 460px;
+            overflow: hidden;
+        }
+
+        .auth-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: white;
+            background-color: var(--dark-color);
+        }
+
+        .auth-tab.active {
+            background-color: var(--primary-color);
+        }
+
+        .auth-tab:nth-child(2).active {
+            background-color: var(--accent-color);
+        }
+
+        .auth-tab:nth-child(3).active {
+            background-color: var(--secondary-color);
+        }
+
+        .auth-content {
+            padding: 30px;
+            background-color: #fff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--border-color);
+        }
+
+        @media (max-width: 480px) {
+            .auth-header {
+                flex-direction: column;
+            }
+
+            .auth-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="welcome-title">Welcome to CarRent System</h1>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="auth-tab active" onclick="switchTab(event, 'login')">User Login</div>
+            <div class="auth-tab" onclick="switchTab(event, 'register')">User Registration</div>
+            <div class="auth-tab" onclick="switchTab(event, 'admin')">Admin Login</div>
+        </div>
+
+        <div class="auth-content">
+            <!-- User Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>User Login</h2>
+                <form action="loginServlet" method="post">
+                    <div class="input-group">
+                        <label for="login-email">Email address</label>
+                        <input type="email" name="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" name="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+
+            <!-- User Registration Form -->
+            <div id="register-form" class="auth-form">
+                <h2>Create Account</h2>
+                <form action="userRegisterServlet" method="post">
+                    <div class="input-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" name="name" id="reg-name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-email">Email address</label>
+                        <input type="email" name="email" id="reg-email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" name="password" id="reg-password" placeholder="Create a password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent">Register</button>
+                </form>
+            </div>
+
+            <!-- Admin Login Form -->
+            <div id="admin-form" class="auth-form">
+                <h2>Admin Login</h2>
+                <form action="adminLoginServlet" method="post">
+                    <div class="input-group">
+                        <label for="admin-email">Admin Email</label>
+                        <input type="email" name="email" id="admin-email" placeholder="Enter admin email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" name="password" id="admin-password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Login as Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(event, tabName) {
+            // Hide all forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected form and set active tab
+            document.getElementById(tabName + '-form').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
